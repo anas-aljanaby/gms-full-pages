@@ -1,73 +1,54 @@
 
 import type { Loan, RepaymentInstallment, LoansData } from '../types';
 
-const generateSchedule = (loanId: string, totalAmount: number, installments: number, issueDate: Date, paidCount: number): RepaymentInstallment[] => {
-    const schedule: RepaymentInstallment[] = [];
-    const installmentAmount = totalAmount / installments;
-
-    for (let i = 1; i <= installments; i++) {
-        const dueDate = new Date(issueDate);
-        dueDate.setMonth(dueDate.getMonth() + i);
-
-        const isPaid = i <= paidCount;
-        let status: RepaymentInstallment['status'] = 'Due';
-        let paidDate: string | undefined = undefined;
-
-        if (isPaid) {
-            status = 'Paid';
-            const paymentDate = new Date(dueDate);
-            paymentDate.setDate(paymentDate.getDate() - Math.floor(Math.random() * 5)); // Paid a few days before due
-            paidDate = paymentDate.toISOString();
-        } else {
-            if (new Date() > dueDate) {
-                status = 'Overdue';
-            }
-        }
-        
-        schedule.push({
-            id: `${loanId}-inst-${i}`,
-            loanId,
-            installmentNumber: i,
-            dueDate: dueDate.toISOString(),
-            amount: installmentAmount,
-            status,
-            paidDate,
-        });
-    }
-    return schedule;
-};
-
+const mkSchedule = (loanId: string, amounts: { due: string; amount: number; status: RepaymentInstallment['status'] }[]): RepaymentInstallment[] =>
+  amounts.map((a, i) => ({
+    id: `${loanId}-i${i + 1}`,
+    loanId,
+    installmentNumber: i + 1,
+    dueDate: a.due,
+    amount: a.amount,
+    status: a.status,
+    paidDate: a.status === 'Paid' ? a.due : undefined,
+  }));
 
 const MOCK_LOANS: Loan[] = [
-    {
-        id: 'L001',
-        borrowerName: 'أحمد',
-        type: 'educational',
-        amount: 5000,
-        currency: 'USD',
-        issueDate: '2024-03-01T00:00:00Z',
-        status: 'Active',
-        repaymentSchedule: generateSchedule('L001', 5000, 12, new Date('2024-03-01T00:00:00Z'), 4),
-        donorId: 'DN-001',
-        stakeholderId: 2,
-        projectId: 'PROJ-2024-001',
-        financeEntryId: 'FIN-L001-INIT'
-    },
-    {
-        id: 'L002',
-        borrowerName: 'سارة',
-        type: 'operational',
-        amount: 12000,
-        currency: 'USD',
-        issueDate: '2024-01-15T00:00:00Z',
-        status: 'Active',
-        repaymentSchedule: generateSchedule('L002', 12000, 12, new Date('2024-01-15T00:00:00Z'), 6),
-        donorId: 'DN-004',
-        stakeholderId: 3,
-        financeEntryId: 'FIN-L002-INIT'
-    }
+  {
+    id: 'L001',
+    borrowerName: 'أحمد',
+    type: 'educational',
+    amount: 5000,
+    currency: 'USD',
+    issueDate: '2024-03-01T00:00:00Z',
+    status: 'Active',
+    repaymentSchedule: mkSchedule('L001', [
+      { due: '2024-04-01T00:00:00Z', amount: 1000, status: 'Paid' },
+      { due: '2024-05-01T00:00:00Z', amount: 1000, status: 'Paid' },
+      { due: '2024-12-01T00:00:00Z', amount: 3000, status: 'Due' },
+    ]),
+    donorId: 'DN-001',
+    stakeholderId: 1,
+    projectId: 'PROJ-DEMO-1',
+    financeEntryId: 'FIN-L001',
+  },
+  {
+    id: 'L002',
+    borrowerName: 'سارة',
+    type: 'operational',
+    amount: 3000,
+    currency: 'USD',
+    issueDate: '2024-01-15T00:00:00Z',
+    status: 'Active',
+    repaymentSchedule: mkSchedule('L002', [
+      { due: '2024-02-15T00:00:00Z', amount: 1500, status: 'Paid' },
+      { due: '2024-12-15T00:00:00Z', amount: 1500, status: 'Due' },
+    ]),
+    donorId: 'DN-002',
+    stakeholderId: 2,
+    financeEntryId: 'FIN-L002',
+  },
 ];
 
 export const MOCK_LOANS_DATA: LoansData = {
-    loans: MOCK_LOANS,
+  loans: MOCK_LOANS,
 };

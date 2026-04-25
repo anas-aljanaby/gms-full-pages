@@ -2,7 +2,7 @@
 import React from 'react';
 import type { Student } from '../../../types';
 import { useLocalization } from '../../../hooks/useLocalization';
-import { XIcon } from '../../../icons/GenericIcons';
+import { XIcon } from '../../icons/GenericIcons';
 
 interface StudentDetailsModalProps {
     student: Student | null;

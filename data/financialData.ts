@@ -1,42 +1,25 @@
 import type { FinancialPeriod, ApprovalWorkflow, AuthorizationLimit, BankAccount, PaymentGateway, PaymentTerm, PaymentMethod } from '../types';
 
 const generatePeriods = (): FinancialPeriod[] => {
-    const year = 2024;
-    const periods: FinancialPeriod[] = [];
-    const monthNames = {
-        en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        ar: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
-        tr: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
+  const year = 2024;
+  const monthNames = {
+    en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    tr: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+  };
+  // Demo: 3 periods only
+  return [0, 1, 2].map((i) => {
+    const startDate = new Date(year, i, 1);
+    const endDate = new Date(year, i + 1, 0);
+    const status: FinancialPeriod['status'] = i === 0 ? 'Hard-Closed' : i === 1 ? 'Open' : 'Future';
+    return {
+      id: `period-${year}-${i + 1}`,
+      name: { en: `${monthNames.en[i]} ${year}`, ar: monthNames.ar[i], tr: monthNames.tr[i] },
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+      status,
     };
-
-    for (let i = 0; i < 12; i++) {
-        const startDate = new Date(year, i, 1);
-        const endDate = new Date(year, i + 1, 0);
-        
-        let status: FinancialPeriod['status'];
-        if (i < 5) {
-            status = 'Hard-Closed';
-        } else if (i === 5) {
-            status = 'Soft-Closed';
-        } else if (i === 6) {
-            status = 'Open';
-        } else {
-            status = 'Future';
-        }
-
-        periods.push({
-            id: `period-${year}-${i + 1}`,
-            name: {
-                en: `Period ${i + 1} - ${monthNames.en[i]}`,
-                ar: `الفترة ${i + 1} - ${monthNames.ar[i]}`,
-                tr: `Dönem ${i + 1} - ${monthNames.tr[i]}`
-            },
-            startDate: startDate.toISOString(),
-            endDate: endDate.toISOString(),
-            status: status
-        });
-    }
-    return periods;
+  });
 };
 
 export const MOCK_FISCAL_YEAR_2024: FinancialPeriod[] = generatePeriods();

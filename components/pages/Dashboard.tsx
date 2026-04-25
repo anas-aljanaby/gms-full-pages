@@ -1,7 +1,6 @@
 
 
 import React, { useState, useEffect, lazy, Suspense, useCallback, memo, useRef } from 'react';
-import { Responsive, WidthProvider, type Layout, type Layouts } from 'react-grid-layout';
 import { useLocalization } from '../../hooks/useLocalization';
 import { useToast } from '../../hooks/useToast';
 import { MOCK_AI_INSIGHTS } from '../../data/aiInsightsData';
@@ -9,7 +8,7 @@ import SmartKPICard from '../dashboard/SmartKPICard';
 import type { Language, Alert } from '../../types';
 import { MOCK_ALERTS } from '../../data/alertsData';
 import AlertsTicker from '../common/AlertsTicker';
-import { XIcon, WrenchIcon, GridIcon } from '../icons/GenericIcons';
+import { XIcon, WrenchIcon } from '../icons/GenericIcons';
 import DashboardControls from '../dashboard/DashboardControls';
 import type { FilterState } from '../dashboard/DashboardControls';
 import SkeletonLoader from '../common/SkeletonLoader';
@@ -123,8 +122,6 @@ const ToastDemoCard: React.FC = () => {
     );
 }
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
-
 // --- WIDGETS CONFIG ---
 const WIDGET_COMPONENTS: Record<string, React.FC<any>> = {
     SmartKPICard,
@@ -158,16 +155,12 @@ export const ALL_WIDGETS: Record<string, { nameKey: string; component: string; p
 export const KPI_WIDGETS = ['kpiSponsorships', 'kpiOverdueTasks', 'kpiProjectsAtRisk', 'kpiFundsDisbursed'];
 const PINNED_WIDGETS = ['aiInsights', 'quickActions'];
 
-// --- PRESET LAYOUTS ---
+// --- PRESET LAYOUTS (simplified: fewer widgets, no react-grid-layout) ---
 const defaultLayouts = {
     lg: [
-        { i: 'matrix', x: 0, y: 0, w: 1, h: 2 },
-        { i: 'donationsChart', x: 0, y: 2, w: 1, h: 2 },
-        { i: 'timeline', x: 0, y: 4, w: 1, h: 4 },
-        { i: 'compare', x: 0, y: 8, w: 1, h: 2 },
-        { i: 'favReport', x: 0, y: 10, w: 1, h: 1 },
-        { i: 'onboarding', x: 0, y: 11, w: 1, h: 2 },
-    ]
+        { i: 'donationsChart', x: 0, y: 0, w: 1, h: 2 },
+        { i: 'compare', x: 0, y: 2, w: 1, h: 2 },
+    ],
 };
 export const PRESET_LAYOUTS = {
     executive: {
@@ -207,15 +200,23 @@ const getInitialLayouts = () => {
     return defaultLayouts;
 };
 
+const DEFAULT_DEMO_WIDGETS = [
+    ...KPI_WIDGETS,
+    'donationsChart',
+    'compare',
+    'favReport',
+];
+
 const getInitialVisibleWidgets = () => {
     try {
         const saved = localStorage.getItem('dashboard-visible-widgets');
         if (saved) {
             return JSON.parse(saved);
         }
-    } catch(e) { /* fall through to default */ }
-    // Default: all widgets visible
-    return Object.keys(ALL_WIDGETS).filter(id => !PINNED_WIDGETS.includes(id));
+    } catch (e) {
+        /* fall through to default */
+    }
+    return DEFAULT_DEMO_WIDGETS;
 };
 
 
@@ -230,7 +231,9 @@ const getInitialVisibleWidgets = () => {
 const Dashboard: React.FC<DashboardProps> = ({ setActiveModule }) => {
     const { t } = useLocalization();
     const [isCustomizeMode, setIsCustomizeMode] = useState(false);
-    const [layouts, setLayouts, undo, redo, canUndo, canRedo] = useHistoryState<Layouts>(getInitialLayouts());
+    const [layouts, setLayouts, undo, redo, canUndo, canRedo] = useHistoryState<Record<string, { i: string; x: number; y: number; w: number; h: number }[]>>(
+        getInitialLayouts()
+    );
     const [visibleWidgets, setVisibleWidgets] = useState<string[]>(getInitialVisibleWidgets());
     const [alerts, setAlerts] = useState<Alert[]>(MOCK_ALERTS);
     const [timelineProgress, setTimelineProgress] = useState(65);
@@ -251,15 +254,6 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveModule }) => {
         localStorage.setItem('dashboard-visible-widgets', JSON.stringify(visibleWidgets));
     }, [layouts, visibleWidgets]);
 
-    /**
-     * onLayoutChange - معالج يتم استدعاؤه عند تغيير تخطيط الشبكة.
-     * @param {Layout[]} layout - التخطيط الحالي.
-     * @param {Layouts} newLayouts - كائن التخطيطات الجديد.
-     */
-    const onLayoutChange = (layout: Layout[], newLayouts: Layouts) => {
-        setLayouts(newLayouts);
-    };
-    
     /**
      * handleAlertClick - معالج النقر على تنبيه من الشريط المتحرك.
      * @param {Alert} alert - كائن التنبيه الذي تم النقر عليه.
@@ -363,26 +357,16 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveModule }) => {
                         })}
                     </div>
 
-                    <ResponsiveGridLayout
-                        className="layout"
-                        layouts={layouts}
-                        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                        cols={{ lg: 1, md: 1, sm: 1, xs: 1, xxs: 1 }}
-                        rowHeight={150}
-                        onLayoutChange={onLayoutChange}
-                        isDraggable={isCustomizeMode}
-                        isResizable={isCustomizeMode}
-                        draggableHandle=".drag-handle"
-                        margin={[32, 32]}
-                        containerPadding={[0, 0]}
-                    >
-                        {gridWidgetsToRender.map(widgetId => (
-                            <div key={widgetId} className="custom-widget bg-transparent">
-                                {isCustomizeMode && <div className="drag-handle absolute top-2 right-2 p-2 cursor-move bg-black/10 rounded-full z-10"><GridIcon className="w-4 h-4"/></div>}
+                    <div className="space-y-8">
+                        {gridWidgetsToRender.map((widgetId) => (
+                            <div key={widgetId} className="custom-widget bg-transparent min-h-[8rem]">
+                                {isCustomizeMode && (
+                                    <div className="mb-1 text-xs text-muted-foreground">Widget: {widgetId}</div>
+                                )}
                                 <div className="h-full">{renderWidget(widgetId)}</div>
                             </div>
                         ))}
-                    </ResponsiveGridLayout>
+                    </div>
                 </main>
                 
                 {/* Sticky Sidebar (Spans 1/3 on lg) */}

@@ -81,12 +81,7 @@ const reducer = (state: GamificationData['userAchievement'], action: Action): Ga
  * triggerConfetti - دالة لإطلاق قصاصات الورق الملونة (confetti).
  */
 const triggerConfetti = () => {
-    confetti({
-        particleCount: 150,
-        spread: 90,
-        origin: { y: 0.6 },
-        colors: ['#3B82F6', '#10B981', '#F59E0B', '#A78BFA']
-    });
+    confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
 };
 
 /**
