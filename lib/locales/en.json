@@ -1,0 +1,281 @@
+
+{
+    "common": {
+        "searchPlaceholder": "Search everything...",
+        "close": "Close",
+        "previous": "Previous",
+        "next": "Next",
+        "pagination_summary": "Showing {start}-{end} of {total}",
+        "dismissAlert": "Dismiss alert",
+        "loading": "Loading...",
+        "analyzing": "Analyzing...",
+        "generating": "Generating...",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "date": "Date",
+        "time": "Time",
+        "share": "Share",
+        "shareReport": "Share Report",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "validFor7Days": "Link is valid for 7 days",
+        "showing": "Showing",
+        "of": "of",
+        "preview": "Preview",
+        "save": "Save",
+        "clearFilters": "Clear Filters",
+        "improvement": "improvement"
+    },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "donors": "Donor Management",
+        "donor_intelligence": "Donor Intelligence",
+        "individual_donors": "Individual Donors",
+        "institutional_donors": "Institutional Donors",
+        "leadership": "Leadership Qualification",
+        "sponsorship": "Sponsorship Management",
+        "projects": "Project Management",
+        "beneficiaries": "Beneficiary Management",
+        "orphanages": "Orphanage Management",
+        "stakeholder_management": "Stakeholder Management",
+        "hr": "Human Resources",
+        "financials": "Financials",
+        "inventory": "Inventory Management",
+        "investments": "Investment Management",
+        "loans": "Loans Portfolio",
+        "implementing_partners": "Implementing Partners",
+        "partner_evaluations": "Partner Evaluations",
+        "compliance": "Compliance",
+        "grc": "GRC",
+        "gri_reporting": "GRI Reporting",
+        "sharia_compliance": "Sharia Compliance",
+        "sharia_board": "Sharia Board Management",
+        "digital_marketing": "Digital Marketing Hub",
+        "ai_automation": "AI & Automation",
+        "bousala": "Bousala",
+        "optimal_contact_timing": "Optimal Contact Timing",
+        "smart_message_campaign": "Smart Message Campaign",
+        "anomaly_detection": "Anomaly Detection",
+        "educational_materials": "Educational Materials",
+        "media_documentation": "Media Documentation",
+        "gamification": "Gamification",
+        "admin_dashboard": "Admin Dashboard",
+        "reports": "Reports",
+        "settings": "Settings",
+        "help": "Help & Support",
+        "logout": "Logout",
+        "more": "More",
+        "community_forum": "Forum",
+        "community_events": "Events",
+        "community_founders": "Founders Directory",
+        "community": "Community",
+        "incubation_mentorship": "Mentorship"
+    },
+    "header": {
+        "greeting": "Welcome",
+        "profile": {
+            "name": "Ali",
+            "email": "ali@example.com"
+        },
+        "role": "Role"
+    },
+    "leadership": {
+        "title": "Leadership Qualification",
+        "tabs": {
+            "overview": "Overview",
+            "calendar": "Calendar",
+            "projects": "Student Projects",
+            "student_environment": "Student Environment",
+            "scout": "Scout Unit",
+            "leadership": "Leadership Qualification",
+            "educational": "Educational Development"
+        },
+        "overview": {
+            "workTeam": "Work Team",
+            "totalEvents": "Total Events",
+            "studentProjectImpact": "Student Project Impact",
+            "beneficiaries": "Beneficiaries",
+            "upcomingEvents": "Upcoming Events"
+        },
+        "projects": {
+            "activeProjects": "Active Projects",
+            "statuses": {
+                "completed": "Completed"
+            }
+        },
+        "metrics": {
+            "performanceDashboard": "Performance Dashboard",
+            "overallCompletion": "Overall Completion",
+            "stageCompletion": "Stage Completion",
+            "onTimeCompletion": "On-Time Completion",
+            "avgAttendance": "Avg. Attendance",
+            "cancellationRate": "Cancellation Rate",
+            "teamEngagement": "Team Engagement",
+            "eventsStatusBreakdown": "Events Status Breakdown"
+        },
+        "noEventsPlanned": "No events planned",
+        "workTeam": "Work Team",
+        "teamTypes": {
+            "staff": "Staff",
+            "volunteer": "Volunteer"
+        },
+        "stages": {
+            "s1": "Second Semester",
+            "s2": "First Semester",
+            "s3": "Summer Break"
+        },
+        "eventTypes": {
+            "lecture": "Lecture",
+            "course": "Course",
+            "camp": "Camp",
+            "workshop": "Workshop",
+            "activity": "Activity",
+            "ceremony": "Ceremony",
+            "meeting": "Meeting",
+            "event": "Event"
+        },
+        "eventStatuses": {
+            "planned": "Planned",
+            "in-progress": "In-progress",
+            "completed": "Completed",
+            "cancelled": "Cancelled",
+            "missed": "Missed"
+        },
+        "eventFacilitator": "Facilitator",
+        "eventLocation": "Location",
+        "eventTime": "Time",
+        "eventParticipants": "Participants",
+        "workPlan": "Work Plan",
+        "confirmCancel": "Are you sure you want to cancel this event?",
+        "eventCancelled": "Event cancelled.",
+        "eventCompleted": "Event marked as completed.",
+        "markCompleted": "Mark as Completed",
+        "cancelEvent": "Cancel Event",
+        "quranicTimeline": {
+            "title": "Quranic Timeline",
+            "progress": "Progress",
+            "weeks": "Weeks",
+            "totalDuration": "Total Duration",
+            "completed": "Completed",
+            "inProgress": "In Progress",
+            "upcoming": "Upcoming",
+            "week": "Week",
+            "dateRange": "Date Range",
+            "content": "Content",
+            "status": "Status",
+            "notes": "Notes",
+            "stationDetails": "Station Details",
+            "markAsComplete": "Mark as Complete",
+            "inprogress": "In Progress"
+        }
+    },
+    "beneficiaries": {
+        "title": "Beneficiary Management",
+        "backToList": "Back to Beneficiaries List",
+        "subtitle_at": "{field} at {university}",
+        "kpi": {
+          "gpa": "Current GPA",
+          "financialAid": "Financial Aid",
+          "communication": "Communication",
+          "documents": "Documents",
+          "communication_value": "{count} logs"
+        },
+        "overview": {
+          "title": "Personal Details",
+          "id": "ID",
+          "country": "Country",
+          "email": "Email",
+          "phone": "Phone",
+          "university": "University",
+          "major": "Major",
+          "gpa": "GPA",
+          "academic_year": "Academic Year"
+        },
+        "modal": {
+            "tabs": {
+                "personal": "Personal",
+                "journey_impact": "Journey & Impact",
+                "academic": "Academic",
+                "sponsorship": "Sponsorship",
+                "needs_assessment": "Needs Assessment",
+                "qualification_journey": "Qualification Journey",
+                "aid_log": "Aid & Services",
+                "calendar": "Calendar",
+                "files_and_documents": "Files & Documents",
+                "communication": "Communication"
+            },
+            "add": {
+                "title": "Add New Beneficiary",
+                "fullName": "Full Name",
+                "beneficiaryType": "Beneficiary Type",
+                "country": "Country",
+                "email": "Email",
+                "phone": "Phone",
+                "addButton": "Add"
+            }
+        },
+        "types": {
+            "all": "All",
+            "student": "Student",
+            "orphan": "Orphan",
+            "hafiz": "Hafiz",
+            "family": "Family",
+            "institution": "Institution",
+            "community": "Community",
+            "incubation_beneficiary": "Incubation Beneficiary",
+            "individual-other": "Individual"
+        }
+    },
+    "incubation_investors": {
+        "title": "Incubation Investors",
+        "viewDemoDay": "View Demo Day Evaluations",
+        "totalInvestors": "Total Investors",
+        "totalFunds": "Total Funds Represented",
+        "mostActive": "Most Active",
+        "table_investor": "Investor",
+        "table_fundType": "Fund / Type",
+        "table_focus": "Investment Focus",
+        "table_startups": "Followed Startups",
+        "table_lastInteraction": "Last Interaction",
+        "fundTypes": {
+            "vc_firm": "VC Firm",
+            "angel_network": "Angel Network"
+        }
+    },
+    "incubation_stakeholders": {
+        "title": "Incubation Stakeholders",
+        "kpi_total": "Total Stakeholders",
+        "kpi_mentors": "Mentors",
+        "kpi_investors": "Investors",
+        "kpi_partners": "Partners",
+        "add_stakeholder": "Add Stakeholder",
+        "search_placeholder": "Search by name or role...",
+        "table": {
+            "name": "Name",
+            "role": "Role",
+            "relatedProgram": "Related Program/Startup",
+            "contact": "Contact",
+            "notes": "Notes",
+            "actions": "Actions"
+        },
+        "roles": {
+            "Mentor": "Mentor",
+            "Investor": "Investor",
+            "CorporatePartner": "Corporate Partner",
+            "UniversityPartner": "University Partner",
+            "Expert": "Expert"
+        }
+    },
+    "incubationSuccessMetrics": {
+        "fundingPerDonorTitle": "Funding Per Donor Organization",
+        "fundingVsImpactTitle": "Funding vs. Impact Score Over Time",
+        "grantDistributionTitle": "Grant Distribution by Sector",
+        "roiVsMentorshipTitle": "ROI vs. Mentorship Intensity",
+        "fundingAxisLabel": "Funding (USD)",
+        "impactScoreAxisLabel": "Impact Score",
+        "mentorshipSessionsAxisLabel": "Mentorship Sessions",
+        "roiAxisLabel": "ROI (x)",
+        "donor": "Donor",
+        "sector": "Sector"
+    }
+}
