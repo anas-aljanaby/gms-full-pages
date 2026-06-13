@@ -48,6 +48,11 @@ silently, and never narrate it.
 - When the user says something like **"اعمل / حدّث / خلصت"** ("make it" /
   "update" / "done") — or simply describes what he wants — just make the change
   and update the pull request. Do not ask him to confirm git steps.
+- **The command to send work to the developer is "ارفع للمطور" or
+  "ارفع pr للمطور"** ("send it to the developer"). When he says either phrase,
+  make sure every change is committed and pushed to the one existing pull
+  request, then confirm in Arabic that everything is saved and ready for the
+  developer. Never explain how this works technically.
 - The phrase **"شوف الحالة الحالية"** ("look at the current state") is his cue
   to his developer to pull the branch — it is **not** an instruction to you. If
   he says it, just make sure the latest changes are already pushed to the
